@@ -8,9 +8,13 @@ on:
 jobs:
   deploy-to-gh-pages:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pages: write
+      id-token: write
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Install Packages
         run: |
