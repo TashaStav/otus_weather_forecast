@@ -6,7 +6,7 @@
     "test": "jest",
     "lint": "eslint src",
     "lint:fix": "eslint src --fix",
-    "prepare": "husky && husky install"
+    "prepare": "husky"
   },
   "repository": {
     "type": "git",
