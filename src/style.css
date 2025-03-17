@@ -1,0 +1,129 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  outline: none;
+  border: 0;
+}
+body {
+  max-width: 1440px;
+  margin: 0 auto;
+  background-image: url(./img/6328744.jpg);
+  background-position: center;
+  background-size: auto;
+  height: 100vh;
+}
+.title {
+  font-family: 'Lato', sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  font-size: 70px;
+  color: #4d220e;
+  max-width: 1440;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 40px;
+}
+.container {
+  margin-left: 70px;
+  display: grid;
+  grid-template-columns: 500px 40% 20%;
+  grid-template-rows: auto auto;
+  gap: 30px;
+  grid-template-areas:
+    'input input history'
+    'map weather history';
+}
+.search-box {
+  font-family: 'Lato', sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 16px;
+  grid-area: input;
+}
+.search-box input {
+  height: 30px;
+  width: 500px;
+  margin-right: 10px;
+  font-size: 1rem;
+  border: 1px solid #4d220e;
+}
+.btn {
+  font-family: 'Lato', sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 1rem;
+  height: 30px;
+  width: 200px;
+  border: 1px solid #4d220e;
+  color: #4d220e;
+}
+.map {
+  width: 500px;
+  height: 500px;
+  background-color: #bc987e;
+  border: 1px solid #4d220e;
+  grid-area: map;
+}
+.history {
+  grid-area: history;
+  font-family: 'Lato', sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 26px;
+  color: #4d220e;
+}
+.history-title {
+  font-family: 'Lato', sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  font-size: 30px;
+  color: #4d220e;
+  text-transform: uppercase;
+}
+.history-item {
+  list-style-type: none;
+}
+.weather {
+  grid-area: weather;
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  max-width: 380px;
+  max-height: 380px;
+  margin-left: 50px;
+  border: 2px solid #4d220e;
+  border-radius: 5px;
+}
+.weather-img {
+  font-size: 50px;
+  margin: 0 auto;
+  margin-top: 10px;
+  margin-bottom: 30px;
+}
+.temp {
+  font-family: 'Lato', sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  font-size: 50px;
+  margin: 0 auto;
+}
+.city {
+  font-family: 'Lato', sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  font-size: 50px;
+  margin: 0 auto;
+  margin-bottom: 50px;
+}
+.details {
+  display: flex;
+  justify-content: space-around;
+}
+.wrp {
+  font-family: 'Lato', sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 26px;
+  margin: 0 auto;
+}
