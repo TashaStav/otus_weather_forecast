@@ -1,10 +1,16 @@
-export const apiKey = '65ac23436cb9e7ba055876f993d6c41c';
-export const mapApiKey = '2e5928cb-06a1-4190-8975-ae2d88ba9c7b';
+const form = document.querySelector('.search-box');
+const apiKey = '65ac23436cb9e7ba055876f993d6c41c';
+const mapApiKey = '2e5928cb-06a1-4190-8975-ae2d88ba9c7b';
+const mapApiUrl = `https://static-maps.yandex.ru/v1?apikey=${mapApiKey}`;
 
-export const weatherIcon = document.querySelector('.weather-img i');
-export const error = document.querySelector('.error');
+const weatherIcon = document.querySelector('.weather-img i');
+const error = document.querySelector('.error');
 
-export async function checkWeather(city) {
+form.addEventListener('submit', (ev) => {
+  ev.preventDefault();
+});
+
+async function checkWeather(city) {
   const apiUrl = `https://api.openweathermap.org/data/2.5/weather?units=metric&q=${city}&appid=${apiKey}`;
   const response = await fetch(apiUrl);
   if (response.status === 404) {
@@ -32,7 +38,6 @@ export async function checkWeather(city) {
 
     error.style.display = 'none';
 
-    const mapApiUrl = `https://static-maps.yandex.ru/v1?apikey=${mapApiKey}`;
     const { coord } = data;
     const lat = coord.lat;
     const lon = coord.lon;
@@ -42,3 +47,5 @@ export async function checkWeather(city) {
     localStorage.setItem(city, JSON.stringify(data));
   }
 }
+
+export { checkWeather, apiKey, weatherIcon, mapApiUrl };
