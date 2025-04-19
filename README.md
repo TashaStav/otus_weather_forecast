@@ -24,3 +24,4 @@
 4. Приложение отобразит текущую погоду выбранном городе, карту местности и добавит данный город в историю просмотров.
 5. При необходимости просмотра погоды в ранее введенном городе нажмите на название города в истории.
 
+[![PR Sanity Check](https://github.com/TashaStav/otus_weather_forecast/actions/workflows/sanity-check.yml/badge.svg)](https://github.com/TashaStav/otus_weather_forecast/actions/workflows/sanity-check.yml)
