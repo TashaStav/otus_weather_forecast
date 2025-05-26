@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - main
-    pull_request:
+  pull_request:
     branches:
       - main
 
@@ -12,22 +12,20 @@ jobs:
   deploy-to-gh-pages:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
+      - name: Checkout repository
+        uses: actions/checkout@v3 
 
       - name: Install Packages
         run: |
           npm install
 
-      - name: Build
+      - name: Build project
         run: |
           npm run build
 
-      - name: Deploy
-        # https://github.com/marketplace/actions/deploy-to-github-pages
+      - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@3.6.2
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           BRANCH: gh-pages # The branch the action should deploy to.
-          FOLDER: . # The folder the action should deploy.
-          CLEAN: true # Automatically remove deleted files from the deploy branch
+          FOLDER: dist # The folder the action should deploy.
