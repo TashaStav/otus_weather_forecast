@@ -135,5 +135,11 @@ body {
   font-style: normal;
   font-size: 26px;
   color:darkred;
-  display: none;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  height: auto;
+  overflow: hidden;
+}
+.error.visible {
+  opacity: 1;
 }

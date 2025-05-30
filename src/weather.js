@@ -8,6 +8,13 @@ export async function checkWeather(city) {
   if (response.status === 200) {
     return await response.json();
   } else {
+    const error = document.querySelector('.error');
+    if (error) error.classList.add('visible');
+
+    setTimeout(() => {
+      error.classList.remove('visible');
+    }, 3000);
+
     throw new Error('City not found');
   }
 }
