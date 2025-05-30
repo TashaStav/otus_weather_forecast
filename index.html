@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Weather forecast</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="style.css" />
+    <script
+      src="https://kit.fontawesome.com/0e3eae5243.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <h1 class="title">Weather today</h1>
+    <div class="container">
+      <div class="search-box">
+        <form action="#" method="get" class = "form">
+          <input type="text" name="cityName" placeholder="Enter city name" required />
+          <button class="btn" type="submit">Show</button>
+        </form>
+        <div class="error">
+          <p>Invalid city name</p>
+        </div>
+      </div>
+      <div class="map">
+      </div>
+      <div class="weather">
+        <div class="weather-img">
+          <i class="fa-solid fa-sun"></i>
+        </div>
+        <h2 class="temp">10 &#8451;</h2>
+        <h3 class="city">Moscow</h3>
+        <div class="details">
+          <div class="wrp">
+            <i class="fa-solid fa-water"></i>
+            <div>
+              <p class="humidity">50%</p>
+              <p>Humidity</p>
+            </div>
+          </div>
+          <div class="wrp">
+            <i class="fa-solid fa-wind"></i>
+            <div>
+              <p class="wind-speed">5 km/h</p>
+              <p>Wind speed</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="history">
+        <h3 class="history-title">History</h3>
+        <ul class="history-list">
+        </ul>
+      </div>
+    </div>
+    <script src="main.js" type="module"></script>
+  </body>
+</html>
