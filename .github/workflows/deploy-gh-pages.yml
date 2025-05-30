@@ -1,31 +1,30 @@
 name: Deploy to GithubPages
 
 on:
-  push:
-    branches:
-      - main
   pull_request:
     branches:
-      - main
+      -main
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
 
 jobs:
-  deploy-to-gh-pages:
+  deploy:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3 
-
-      - name: Install Packages
-        run: |
-          npm install
-
-      - name: Build project
-        run: |
-          npm run build
-
-      - name: Deploy to GitHub Pages
-        uses: JamesIves/github-pages-deploy-action@3.6.2
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          BRANCH: gh-pages # The branch the action should deploy to.
-          FOLDER: dist # The folder the action should deploy.
+          node-version: 22
+      - run: npm ci
+      - uses: JamesIves/github-pages-deploy-action@v4
+        with:
+            folder: src
+            target-folder: .
+            branch: gh-pages
+            clean: true
+
+
