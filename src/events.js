@@ -1,4 +1,4 @@
-import { checkWeather, renderMap, renderWeather } from './weather.js';
+import { checkWeather, renderMap, renderWeather, apiKey } from './weather.js';
 
 export function attachForm() {
   const form = document.querySelector('.search-box');
@@ -28,7 +28,6 @@ export function drawWeather() {
 
     if (!existingCity.includes(inputValue)) {
       (async function addHistory() {
-        const apiKey = '65ac23436cb9e7ba055876f993d6c41c';
         const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${inputValue}&appid=${apiKey}`;
         const response = await fetch(apiUrl);
         if (response.status === 200) {
@@ -62,7 +61,6 @@ export function drawWeather() {
 }
 
 export function getLocation() {
-  const apiKey = '65ac23436cb9e7ba055876f993d6c41c';
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(async (position) => {
       const lat = position.coords.latitude;
