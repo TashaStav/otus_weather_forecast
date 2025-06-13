@@ -40,6 +40,8 @@ body {
   font-style: normal;
   font-size: 16px;
   grid-area: input;
+  margin-left: 30px;
+  margin-bottom: 30px;
 }
 .search-box input {
   height: 30px;
@@ -59,11 +61,10 @@ body {
   color: #4d220e;
 }
 .map {
-  width: 500px;
-  height: 500px;
-  background-color: #bc987e;
-  border: 1px solid #4d220e;
+  width: 470px;
+  height: 470px;
   grid-area: map;
+  margin-left: 30px;
 }
 .history {
   grid-area: history;
@@ -81,7 +82,7 @@ body {
   color: #4d220e;
   text-transform: uppercase;
 }
-.history-item {
+.history-list {
   list-style-type: none;
 }
 .weather {
@@ -90,7 +91,7 @@ body {
   justify-content: flex-start;
   flex-direction: column;
   max-width: 380px;
-  max-height: 380px;
+  max-height: 450px;
   margin-left: 50px;
   border: 2px solid #4d220e;
   border-radius: 5px;
@@ -126,4 +127,19 @@ body {
   font-style: normal;
   font-size: 26px;
   margin: 0 auto;
+}
+
+.error {
+  font-family: 'Lato', sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 26px;
+  color:darkred;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  height: auto;
+  overflow: hidden;
+}
+.error.visible {
+  opacity: 1;
 }
