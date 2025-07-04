@@ -15,9 +15,17 @@
   </head>
   <body>
     <h1 class="title">Weather today</h1>
+    <header class="header">
+<nav class="main-nav">
+  <a href="#/" >Home</a>
+  <a href="#/history" >History</a>
+</nav>
+</header>
+<main>  
+  <section id="home-page"> 
     <div class="container">
       <div class="search-box">
-        <form action="#" method="get" class = "form">
+        <form action="#" method="get" class = "form" id="home-form">
           <input type="text" name="cityName" placeholder="Enter city name" required />
           <button class="btn" type="submit">Show</button>
         </form>
@@ -31,31 +39,109 @@
         <div class="weather-img">
           <i class="fa-solid fa-sun"></i>
         </div>
-        <h2 class="temp">10 &#8451;</h2>
-        <h3 class="city">Moscow</h3>
+        <h2 class="temp"> &#8451;</h2>
+        <h3 class="city"></h3>
         <div class="details">
           <div class="wrp">
             <i class="fa-solid fa-water"></i>
             <div>
-              <p class="humidity">50%</p>
+              <p class="humidity">%</p>
               <p>Humidity</p>
             </div>
           </div>
           <div class="wrp">
             <i class="fa-solid fa-wind"></i>
             <div>
-              <p class="wind-speed">5 km/h</p>
+              <p class="wind-speed">km/h</p>
               <p>Wind speed</p>
             </div>
           </div>
         </div>
       </div>
+    </div>
+  </section>
+
+  <section id="history-page" hidden> 
+    <div class="history-container">
       <div class="history">
+        <div class="burger">
+        <div class="bar1"></div>
+        <div class="bar2"></div>
+        <div class="bar3"></div>
+</div>
         <h3 class="history-title">History</h3>
         <ul class="history-list">
         </ul>
+              </div>
+        <div class="weather-history">
+        <div class="map"></div>
+      <div class="weather">
+        <div class="weather-img">
+          <i class="fa-solid fa-sun"></i>
+        </div>
+        <h2 class="temp"> &#8451;</h2>
+        <h3 class="city"></h3>
+        <div class="details">
+          <div class="wrp">
+            <i class="fa-solid fa-water"></i>
+            <div>
+              <p class="humidity">%</p>
+              <p>Humidity</p>
+            </div>
+          </div>
+          <div class="wrp">
+            <i class="fa-solid fa-wind"></i>
+            <div>
+              <p class="wind-speed">km/h</p>
+              <p>Wind speed</p>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
+        </div>
+</div>
+    </section>
+
+<section id="city-page"  hidden> 
+  <div class="container city-box">
+          <div class="search-box">
+        <form action="#" method="get" class = "form" id="city-form">
+          <input type="text" name="cityName" placeholder="Enter city name" required />
+          <button class="btn" type="submit">Show</button>
+        </form>
+        <div class="error">
+          <p>Invalid city name</p>
+        </div>
+      </div>
+        <div class="city-weather"></div>
+        <div class="map">
+      </div>
+      <div class="weather">
+        <div class="weather-img">
+          <i class="fa-solid fa-sun"></i>
+        </div>
+        <h2 class="temp"> &#8451;</h2>
+        <h3 class="city"></h3>
+        <div class="details">
+          <div class="wrp">
+            <i class="fa-solid fa-water"></i>
+            <div>
+              <p class="humidity">%</p>
+              <p>Humidity</p>
+            </div>
+          </div>
+          <div class="wrp">
+            <i class="fa-solid fa-wind"></i>
+            <div>
+              <p class="wind-speed">km/h</p>
+              <p>Wind speed</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+</section>
+    </main>
     <script src="main.js" type="module"></script>
   </body>
 </html>
