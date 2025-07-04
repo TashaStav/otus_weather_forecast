@@ -22,7 +22,11 @@ export function router() {
   }
 
   const route = routes[hash];
-  route();
+  if (route) {
+    route();
+  } else {
+    showHome();
+  }
 }
 
 export function showHome() {
