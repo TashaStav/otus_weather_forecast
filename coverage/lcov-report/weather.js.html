@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">82% </span>
+                <span class="strong">89.58% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>41/50</span>
+                <span class='fraction'>43/48</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">66.66% </span>
+                <span class="strong">71.42% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>4/6</span>
+                <span class='fraction'>5/7</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">75% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>3/4</span>
+                <span class='fraction'>3/3</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">82% </span>
+                <span class="strong">89.58% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>41/50</span>
+                <span class='fraction'>43/48</span>
             </div>
         
             
@@ -111,9 +111,7 @@
 <a name='L46'></a><a href='#L46'>46</a>
 <a name='L47'></a><a href='#L47'>47</a>
 <a name='L48'></a><a href='#L48'>48</a>
-<a name='L49'></a><a href='#L49'>49</a>
-<a name='L50'></a><a href='#L50'>50</a>
-<a name='L51'></a><a href='#L51'>51</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L49'></a><a href='#L49'>49</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -135,34 +133,32 @@
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">export const apiKey = '65ac23436cb9e7ba055876f993d6c41c';
 const mapApiKey = '2e5928cb-06a1-4190-8975-ae2d88ba9c7b';
 const mapApiUrl = `https://static-maps.yandex.ru/v1?apikey=${mapApiKey}`;
@@ -184,35 +180,33 @@ export async function checkWeather(city) {
   }
 }
 &nbsp;
-export function renderWeather(data) {
-  document.querySelector('.city').innerHTML = data.name;
-  document.querySelector('.temp').innerHTML =
-    Math.round(data.main.temp) + '&amp;#8451';
-  document.querySelector('.humidity').innerHTML = data.main.humidity + '%';
-  document.querySelector('.wind-speed').innerHTML =
+export function renderWeather(data, root = document) {
+  root.querySelector('.city').innerHTML = data.name;
+  root.querySelector('.temp').innerHTML = Math.round(data.main.temp) + '&amp;#8451';
+  root.querySelector('.humidity').innerHTML = data.main.humidity + '%';
+  root.querySelector('.wind-speed').innerHTML =
     Math.round(data.wind.speed) + ' km/h';
 &nbsp;
   const weatherIcon = document.querySelector('.weather-img i');
   const main = data.weather[0].main;
   if (main === 'Clear') {
     weatherIcon.className = 'fa-solid fa-sun';
-  }<span class="branch-0 cbranch-no" title="branch not covered" > else if (main === 'Rain') {</span>
-<span class="cstat-no" title="statement not covered" >    weatherIcon.className = 'fa-solid fa-cloud-rain';</span>
-<span class="cstat-no" title="statement not covered" >  } else if (main === 'Mist') {</span>
+  } else if (main === 'Rain') {
+    weatherIcon.className = 'fa-solid fa-cloud-rain';
+  }<span class="branch-0 cbranch-no" title="branch not covered" > else if (main === 'Mist') {</span>
 <span class="cstat-no" title="statement not covered" >    weatherIcon.className = 'fa-solid fa-cloud-mist';</span>
 <span class="cstat-no" title="statement not covered" >  } else if (main === 'Drizzle') {</span>
 <span class="cstat-no" title="statement not covered" >    weatherIcon.className = 'fa-solid fa-cloud-drizzle';</span>
 <span class="cstat-no" title="statement not covered" >  }</span>
 }
 &nbsp;
-export function renderMap({ lat, lon }) {
-  const map = document.querySelector('.map');
-  map.innerHTML = `&lt;img src="${mapApiUrl}&amp;ll=${lon},${lat}&amp;size=500,450&amp;z=10"&gt;&lt;/img&gt;`;
-}
+export function renderMap({ lat, lon }, root = document) {
+  const map = root.querySelector('.map');
+  const rect = map.getBoundingClientRect();
+  const width = Math.round(rect.width);
 &nbsp;
-export <span class="fstat-no" title="function not covered" >function saveToLocalStorage(city, data) {</span>
-<span class="cstat-no" title="statement not covered" >  localStorage.setItem(city, JSON.stringify(data));</span>
-<span class="cstat-no" title="statement not covered" >}</span>
+  map.innerHTML = `&lt;img src="${mapApiUrl}&amp;ll=${lon},${lat}&amp;size=${width},450&amp;z=10"&gt;&lt;/img&gt;`;
+}
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
@@ -220,7 +214,7 @@ export <span class="fstat-no" title="function not covered" >function saveToLocal
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-06-13T10:18:17.146Z
+                at 2025-07-02T14:40:09.008Z
             </div>
         <script src="prettify.js"></script>
         <script>

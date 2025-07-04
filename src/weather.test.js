@@ -68,6 +68,24 @@ describe('weather', () => {
         'fa-solid fa-sun',
       );
     });
+    it('should display weather data end rain icon on "Rain"', () => {
+      const mockData = {
+        name: 'Moscow',
+        main: { temp: 28, humidity: 70 },
+        wind: { speed: 11 },
+        weather: [{ main: 'Rain' }],
+      };
+
+      renderWeather(mockData);
+
+      expect(document.querySelector('.city').innerHTML).toBe('Moscow');
+      expect(document.querySelector('.temp').textContent).toBe('28℃');
+      expect(document.querySelector('.humidity').innerHTML).toBe('70%');
+      expect(document.querySelector('.wind-speed').innerHTML).toBe('11 km/h');
+      expect(document.querySelector('.weather-img i').className).toBe(
+        'fa-solid fa-cloud-rain',
+      );
+    });
   });
 
   describe('renderMap', () => {
