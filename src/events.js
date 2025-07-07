@@ -1,17 +1,16 @@
 import { renderMap, renderWeather, apiKey, checkWeather } from './weather.js';
 
-export function handleSearchForm() {
-  const forms = document.querySelectorAll('.search-box');
-  forms.forEach((form) => {
-    form.addEventListener('submit', (ev) => {
-      ev.preventDefault();
+export function handleSearchForm(form) {
+  form.addEventListener('submit', (ev) => {
+    ev.preventDefault();
 
-      const searchInput = form.querySelector('input');
-      const city = searchInput.value.trim();
+    const searchInput = form.querySelector('input');
+    const city = searchInput.value.trim();
 
-      window.location.hash = `#/city/${encodeURIComponent(city)}`;
-      searchInput.value = '';
-    });
+    if (!city) return;
+
+    window.location.hash = `#/city/${encodeURIComponent(city)}`;
+    searchInput.value = '';
   });
 }
 

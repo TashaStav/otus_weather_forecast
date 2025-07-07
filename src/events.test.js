@@ -26,14 +26,16 @@ describe('handleSearchForm', () => {
     document.body.innerHTML = `
       <form class="search-box">
         <input type="text" value="Moscow">
-        <button type="submit">Search</button>
+        <button type="submit">Show</button>
       </form>
     `;
 
-    handleSearchForm();
-
     const form = document.querySelector('.search-box');
-    form.dispatchEvent(new Event('submit', { cancelable: true }));
+    handleSearchForm(form);
+
+    form.dispatchEvent(
+      new Event('submit', { bubbles: true, cancelable: true }),
+    );
 
     expect(window.location.hash).toBe('#/city/Moscow');
     expect(form.querySelector('input').value).toBe('');
