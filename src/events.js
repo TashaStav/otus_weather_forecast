@@ -1,4 +1,5 @@
 import { renderMap, renderWeather, apiKey, checkWeather } from './weather.js';
+import { router } from './router.js';
 
 export function handleSearchForm(form) {
   form.addEventListener('submit', (ev) => {
@@ -7,17 +8,22 @@ export function handleSearchForm(form) {
     const searchInput = form.querySelector('input');
     const city = searchInput.value.trim();
 
-    if (!city) return;
+    if (city) {
+      const url = `/city/${encodeURIComponent(city)}`;
+      history.pushState(null, '', url);
+      router();
+    }
 
-    window.location.hash = `#/city/${encodeURIComponent(city)}`;
     searchInput.value = '';
   });
 }
 
-export function showErr() {
-  const visibleSection = document.querySelector('main > section:not([hidden])');
+export function showErr(sectionId = 'home-page') {
+  const section = document.querySelector(`#${sectionId}`);
+  if (!section) return;
 
-  const error = visibleSection.querySelector('.error');
+  const error = section.querySelector('.error');
+  if (!error) return;
 
   error.classList.add('visible');
 

@@ -16,15 +16,15 @@ describe('Weather App – Home Page', () => {
 
   it('должен перейти на страницу города и отобразить погоду для введённого города', () => {
     // Заглушаем запрос к погоде для London
-    cy.intercept('GET', '**/data/2.5/weather?q=London**', {
-      statusCode: 200,
-      body: {
-        name: 'London',
-        main: { temp: 15 },
-        weather: [{ description: 'cloudy', icon: '04d' }],
-        sys: { country: 'GB' }
-      }
-    }).as('getLondonWeather');
+cy.intercept('GET', /\/data\/2\.5\/weather.*q=London.*/i, {
+  statusCode: 200,
+  body: {
+    name: 'London',
+    main: { temp: 15 },
+    weather: [{ description: 'cloudy', icon: '04d' }],
+    sys: { country: 'GB' }
+  }
+}).as('getLondonWeather');
 
     // Вводим город и кликаем поиск
     cy.get('#home-form input').clear().type('London');

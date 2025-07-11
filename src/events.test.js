@@ -22,13 +22,13 @@ beforeEach(() => {
 });
 
 describe('handleSearchForm', () => {
-  it('should set the URL hash when submitting the form', () => {
+  it('should update URL and dispatch popstate when submitting the form', () => {
     document.body.innerHTML = `
-      <form class="search-box">
-        <input type="text" value="Moscow">
-        <button type="submit">Show</button>
-      </form>
-    `;
+    <form class="search-box">
+      <input type="text" value="Moscow">
+      <button type="submit">Show</button>
+    </form>
+  `;
 
     const form = document.querySelector('.search-box');
     handleSearchForm(form);
@@ -37,8 +37,7 @@ describe('handleSearchForm', () => {
       new Event('submit', { bubbles: true, cancelable: true }),
     );
 
-    expect(window.location.hash).toBe('#/city/Moscow');
-    expect(form.querySelector('input').value).toBe('');
+    expect(window.location.pathname).toBe('/city/Moscow');
   });
 });
 
@@ -101,14 +100,28 @@ describe('drawWeather', () => {
     localStorage.setItem('cityHistory', JSON.stringify(['Rome', 'Madrid']));
 
     document.body.innerHTML = `
-      <ul class="history-list"></ul>
-      <section class="weather-history">
-        <div class="city"></div>
-      </section>
+    <main>
+    <section class="weather-history">
+      <div class="city"></div>
+      <div class="temp"></div>
+      <div class="humidity"></div>
+      <div class="wind-speed"></div>
+      <div class="weather-img"><i></i></div>
+      <div class="map"></div>
+      <div class="error"></div>
+    </section>
+    </main>
+    <ul class="history-list"></ul>
     `;
 
     const mockCoord = { lat: 41.9, lon: 12.5 };
-    checkWeather.mockResolvedValue({ coord: mockCoord });
+    checkWeather.mockResolvedValue({
+      coord: mockCoord,
+      name: 'Rome',
+      main: { temp: 20, humidity: 50 },
+      wind: { speed: 5 },
+      weather: [{ main: 'Clear' }],
+    });
 
     await drawWeather();
 

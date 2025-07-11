@@ -11,29 +11,41 @@ describe('router', () => {
         <section id="city-page"><div class="city-weather"></div><div class="city"></div></section>
       </main>
     `;
-
-    window.location.hash = '#/';
   });
+  it('should call getLocation on path /', () => {
+    Object.defineProperty(window, 'location', {
+      value: new URL('http://localhost/'),
+      writable: true,
+    });
 
-  it('should call showHome on hash #/', () => {
-    const showHomeSpy = jest
+    const getLocationSpy = jest
       .spyOn(events, 'getLocation')
       .mockImplementation(() => {});
+
     router();
-    expect(showHomeSpy).toHaveBeenCalled();
+    expect(getLocationSpy).toHaveBeenCalled();
   });
 
-  it('should call showHistory on hash #/history', () => {
-    window.location.hash = '#/history';
+  it('should call drawWeather on path /history', () => {
+    Object.defineProperty(window, 'location', {
+      value: new URL('http://localhost/history'),
+      writable: true,
+    });
+
     const drawWeatherSpy = jest
       .spyOn(events, 'drawWeather')
       .mockImplementation(() => {});
+
     router();
     expect(drawWeatherSpy).toHaveBeenCalled();
   });
 
-  it('should call showCity with hash #/city/Moscow', async () => {
-    window.location.hash = '#/city/Moscow';
+  it('should call weather rendering functions on path /city/Moscow', async () => {
+    Object.defineProperty(window, 'location', {
+      value: new URL('http://localhost/city/Moscow'),
+      writable: true,
+    });
+
     const checkWeatherMock = jest
       .spyOn(weather, 'checkWeather')
       .mockResolvedValue({

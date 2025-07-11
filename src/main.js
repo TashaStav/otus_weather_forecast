@@ -6,10 +6,21 @@ import {
 } from './events.js';
 import { router } from './router.js';
 
-drawWeather();
-getLocation();
-
 document.addEventListener('DOMContentLoaded', () => {
+  router();
+
+  window.addEventListener('popstate', router);
+
+  document.addEventListener('click', (e) => {
+    const target = e.target.closest('a[data-link]');
+    if (target) {
+      e.preventDefault();
+      const url = target.getAttribute('href');
+      history.pushState(null, '', url);
+      router();
+    }
+  });
+
   const homeForm = document.querySelector('#home-form');
   const cityForm = document.querySelector('#city-form');
 
@@ -19,7 +30,9 @@ document.addEventListener('DOMContentLoaded', () => {
   if (cityForm) {
     handleSearchForm(cityForm);
   }
-  router();
+
   initBurgerMenu();
 });
-window.addEventListener('hashchange', router);
+
+drawWeather();
+getLocation();

@@ -8,26 +8,21 @@ import {
 } from './events.js';
 
 export function router() {
-  const routes = {
-    '#/': showHome,
-    '#/history': showHistory,
-  };
+  const path = window.location.pathname;
 
-  const hash = window.location.hash;
-  const paramMatch = hash.match(/^#\/city\/(.+)/);
-
-  if (paramMatch) {
-    showCity(paramMatch[1]);
-    return;
-  }
-
-  const route = routes[hash];
-  if (route) {
-    route();
+  if (path === '/' || path === '/index.html') {
+    showHome();
+  } else if (path === '/history') {
+    showHistory();
+  } else if (path.startsWith('/city/')) {
+    const city = decodeURIComponent(path.split('/city/')[1]);
+    showCity(city);
   } else {
     showHome();
   }
 }
+
+window.addEventListener('popstate', router);
 
 export function showHome() {
   showSection('home-page');
@@ -46,13 +41,12 @@ export function showHistory() {
 
 async function showCity(cityName) {
   const container = document.querySelector('.city-weather');
-  const decodedCity = decodeURIComponent(cityName);
 
   try {
-    const weatherData = await checkWeather(decodedCity);
+    const weatherData = await checkWeather(cityName);
     showSection('city-page');
 
-    container.innerHTML = ` <h2>Weather in ${decodedCity}</h2>`;
+    container.innerHTML = ` <h2>Weather in ${cityName}</h2>`;
     const section = document.querySelector('#city-page');
 
     renderWeather(weatherData, section);
@@ -60,15 +54,15 @@ async function showCity(cityName) {
 
     let history = loadHistory();
     const maxCity = 10;
-    if (!history.includes(decodedCity)) {
-      history.unshift(decodedCity);
+    if (!history.includes(cityName)) {
+      history.unshift(cityName);
       if (history.length > maxCity) {
         history = history.slice(0, maxCity);
       }
       saveHistory(history);
     }
   } catch {
-    showErr();
+    showErr('city-page');
   }
 }
 

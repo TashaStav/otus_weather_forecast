@@ -4,6 +4,11 @@ import {
   handleSearchForm,
   initBurgerMenu,
 } from './events.js';
+
+jest.mock('./router.js', () => ({
+  router: jest.fn(),
+}));
+
 import { router } from './router.js';
 
 jest.mock('./events.js', () => ({
@@ -13,9 +18,9 @@ jest.mock('./events.js', () => ({
   initBurgerMenu: jest.fn(),
 }));
 
-jest.mock('./router.js', () => ({
-  router: jest.fn(),
-}));
+// jest.mock('./router.js', () => ({
+//   router: jest.fn(),
+// }));
 
 describe('main.js', () => {
   beforeEach(() => {
@@ -44,10 +49,10 @@ describe('main.js', () => {
     expect(initBurgerMenu).toHaveBeenCalled();
   });
 
-  it('calls router when hash changes', async () => {
+  it('calls router when popstate event is triggered', async () => {
     await import('./main.js');
 
-    window.dispatchEvent(new HashChangeEvent('hashchange'));
+    window.dispatchEvent(new PopStateEvent('popstate'));
 
     expect(router).toHaveBeenCalled();
   });
