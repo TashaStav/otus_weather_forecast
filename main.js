@@ -5,7 +5,9 @@ import {
   initBurgerMenu,
 } from './events.js';
 import { router } from './router.js';
-const BASE_URL = '/otus_weather_forecast/';
+
+const BASE_URL = '/otus_weather_forecast';
+
 document.addEventListener('DOMContentLoaded', () => {
   router();
 

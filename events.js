@@ -1,6 +1,7 @@
 import { renderMap, renderWeather, apiKey, checkWeather } from './weather.js';
 import { router } from './router.js';
 
+const BASE_URL = '/otus_weather_forecast';
 export function handleSearchForm(form) {
   form.addEventListener('submit', (ev) => {
     ev.preventDefault();
@@ -9,7 +10,7 @@ export function handleSearchForm(form) {
     const city = searchInput.value.trim();
 
     if (city) {
-      const url = `/city/${encodeURIComponent(city)}`;
+      const url = `${BASE_URL}/city/${encodeURIComponent(city)}`;
       history.pushState(null, '', url);
       router();
     }
