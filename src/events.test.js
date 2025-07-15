@@ -37,7 +37,7 @@ describe('handleSearchForm', () => {
       new Event('submit', { bubbles: true, cancelable: true }),
     );
 
-    expect(window.location.pathname).toBe('/city/Moscow');
+    expect(window.location.pathname).toBe('/otus_weather_forecast/city/Moscow');
   });
 });
 

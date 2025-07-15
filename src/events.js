@@ -1,7 +1,7 @@
 import { renderMap, renderWeather, apiKey, checkWeather } from './weather.js';
 import { router } from './router.js';
+import { BASE_URL } from './router.js';
 
-const BASE_URL = '/otus_weather_forecast';
 export function handleSearchForm(form) {
   form.addEventListener('submit', (ev) => {
     ev.preventDefault();
