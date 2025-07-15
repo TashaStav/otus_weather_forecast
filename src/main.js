@@ -4,7 +4,7 @@ import {
   handleSearchForm,
   initBurgerMenu,
 } from './events.js';
-import { router } from './router.js';
+import { router, BASE_URL } from './router.js';
 
 document.addEventListener('DOMContentLoaded', () => {
   router();
@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (target) {
       e.preventDefault();
       const url = target.getAttribute('href');
-      history.pushState(null, '', url);
+      history.pushState(null, '', `${BASE_URL}${url}`);
       router();
     }
   });
