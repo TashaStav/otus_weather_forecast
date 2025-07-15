@@ -4,8 +4,8 @@ import {
   handleSearchForm,
   initBurgerMenu,
 } from './events.js';
-import { router, BASE_URL } from './router.js';
-
+import { router } from './router.js';
+const BASE_URL = '/otus_weather_forecast/';
 document.addEventListener('DOMContentLoaded', () => {
   router();
 
