@@ -7,7 +7,7 @@ import {
   showErr,
 } from './events.js';
 
-export const BASE_URL = '/otus_weather_forecast/';
+const BASE_URL = '/otus_weather_forecast/';
 export function router() {
   const path = window.location.pathname.replace(BASE_URL, '') || '/';
 
