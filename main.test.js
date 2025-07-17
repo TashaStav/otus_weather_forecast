@@ -18,10 +18,6 @@ jest.mock('./events.js', () => ({
   initBurgerMenu: jest.fn(),
 }));
 
-// jest.mock('./router.js', () => ({
-//   router: jest.fn(),
-// }));
-
 describe('main.js', () => {
   beforeEach(() => {
     document.body.innerHTML = `
