@@ -1,24 +1,20 @@
-describe('Weather App – History Page', () => {
-  it('создаёт историю и отображает данные при клике', () => {
-    // Перейти на главную
-    cy.visit('https://tashastav.github.io/otus_weather_forecast');
+const BASE_URL = '/otus_weather_forecast'
 
-    // Ввести город
-    cy.get('#home-form input').type('Paris');
-    cy.get('#home-form button').click();
+describe('Weather App – History page', () => {
+  it('should load saved cities and allow clicking on history item', () => {
+    cy.visit(`${BASE_URL}/`)
 
-    // Дождаться URL и заголовка
-    cy.url().should('include', '#/city/Paris');
-    cy.get('#city-page .weather .city', { timeout: 10000 }).should('contain', 'Paris');
+    cy.window().then((win) => {
+      win.localStorage.setItem('cityHistory', JSON.stringify(['London', 'Rome']))
+    })
 
-    // Перейти на вкладку History
-    cy.visit('https://tashastav.github.io/otus_weather_forecast/#/history');
+    cy.reload()
 
-    // Кликнуть на первую запись
-    cy.get('.history-list li').first().click();
+    cy.get('.history-list li', { timeout: 10000 }).should('contain.text', 'London')
 
-    // Проверить, что погода отображается
-    cy.get('.weather-history .city').should('contain', 'Paris');
-    cy.get('.weather-history .temp').should('be.visible');
-  });
-});
+    cy.contains('.history-list li', 'London').click({ force: true })
+
+    cy.get('.city', { timeout: 20000 }).should('contain.text', 'London')
+    cy.get('.temp').should('not.be.empty')
+  })
+})

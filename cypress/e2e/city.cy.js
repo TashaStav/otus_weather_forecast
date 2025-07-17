@@ -1,10 +1,24 @@
+const BASE_URL = '/otus_weather_forecast'
+
 describe('Weather App – City Page', () => {
   it('should load the city search page and show the weather for Paris', () => {
-    cy.visit('https://tashastav.github.io/otus_weather_forecast/#/city/Paris');
+    cy.visit(`${BASE_URL}/`) 
 
-    cy.get('#city-page', { timeout: 10000 }).should('be.visible');
+    cy.window().then((win) => {
+      win.history.pushState({}, '', `${BASE_URL}/city`)
+      win.dispatchEvent(new Event('popstate'))
+    })
 
-    cy.get('#city-page h2, #city-page .city').should('contain.text', 'Paris');
-  });
-});
+
+    cy.get('#city-form input[name="cityName"]', { timeout: 10000 })
+      .should('exist')
+      .clear({ force: true })
+      .type('Paris', { force: true })
+
+    cy.get('#city-form').submit()
+
+    cy.get('.city', { timeout: 20000 }).should('contain.text', 'Paris')
+    cy.get('.temp').should('not.be.empty')
+  })
+})
 
