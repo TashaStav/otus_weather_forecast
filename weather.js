@@ -41,8 +41,5 @@ export function renderWeather(data, root = document) {
 
 export function renderMap({ lat, lon }, root = document) {
   const map = root.querySelector('.map');
-  const rect = map.getBoundingClientRect();
-  const width = Math.round(rect.width);
-
-  map.innerHTML = `<img src="${mapApiUrl}&ll=${lon},${lat}&size=${width},450&z=10"></img>`;
+  map.innerHTML = `<img src="${mapApiUrl}&ll=${lon},${lat}&size=450,450&z=10"></img>`;
 }
