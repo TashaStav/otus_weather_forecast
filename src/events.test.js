@@ -1,6 +1,11 @@
-import { drawWeather } from './events';
+import {
+  drawWeather,
+  handleSearchForm,
+  loadHistory,
+  saveHistory,
+  getLocation,
+} from './events';
 import { checkWeather, renderMap, renderWeather } from './weather';
-import { getLocation } from './events';
 
 jest.mock('./weather', () => ({
   checkWeather: jest.fn(),
@@ -10,130 +15,128 @@ jest.mock('./weather', () => ({
 
 globalThis.fetch = jest.fn();
 
-describe('drawWeather', () => {
-  beforeEach(() => {
+beforeEach(() => {
+  document.body.innerHTML = '';
+  localStorage.clear();
+  jest.clearAllMocks();
+});
+
+describe('handleSearchForm', () => {
+  it('should update URL and dispatch popstate when submitting the form', () => {
     document.body.innerHTML = `
-      <div class="search-box">
-        <input type="text" />
-        <button>Search</button>
-      </div>
-      <ul class="history-list"></ul>
-    `;
+    <form class="search-box">
+      <input type="text" value="Moscow">
+      <button type="submit">Show</button>
+    </form>
+  `;
 
-    fetch.mockClear();
-    checkWeather.mockClear();
-    renderMap.mockClear();
-    renderWeather.mockClear();
+    const form = document.querySelector('.search-box');
+    handleSearchForm(form);
+
+    form.dispatchEvent(
+      new Event('submit', { bubbles: true, cancelable: true }),
+    );
+
+    expect(window.location.pathname).toBe('/otus_weather_forecast/city/Moscow');
+  });
+});
+
+describe('history functionality', () => {
+  it('loadHistory returns an array from localStorage', () => {
+    localStorage.setItem('cityHistory', JSON.stringify(['Berlin']));
+    expect(loadHistory()).toEqual(['Berlin']);
   });
 
-  it('should call checkWeather and clear input', async () => {
-    const input = document.querySelector('.search-box input');
-    const button = document.querySelector('.search-box button');
-    input.value = 'Moscow';
-
-    checkWeather.mockResolvedValueOnce({ name: 'Moscow', coord: {} });
-    fetch.mockResolvedValueOnce({
-      status: 200,
-      json: async () => ({}),
-    });
-
-    drawWeather();
-    button.click();
-
-    await new Promise((r) => setTimeout(r));
-
-    expect(checkWeather).toHaveBeenCalledWith('Moscow');
-    expect(renderWeather).toHaveBeenCalled();
-    expect(renderMap).toHaveBeenCalled();
-    expect(input.value).toBe('');
-  });
-
-  it('should not call checkWeather on empty input', () => {
-    const input = document.querySelector('.search-box input');
-    const button = document.querySelector('.search-box button');
-    input.value = '   ';
-
-    drawWeather();
-    button.click();
-
-    expect(checkWeather).not.toHaveBeenCalled();
-  });
-
-  it('should add the city to history if it is not there yet', async () => {
-    const input = document.querySelector('.search-box input');
-    const button = document.querySelector('.search-box button');
-    const list = document.querySelector('.history-list');
-    input.value = 'Paris';
-
-    checkWeather.mockResolvedValueOnce({ name: 'Paris', coord: {} });
-    fetch.mockResolvedValueOnce({
-      status: 200,
-      json: async () => ({}),
-    });
-
-    drawWeather();
-    button.click();
-
-    await new Promise((r) => setTimeout(r));
-
-    const items = list.querySelectorAll('li');
-    expect(items.length).toBe(1);
-    expect(items[0].textContent).toBe('Paris');
-  });
-
-  it('should not add the city to history again', async () => {
-    const list = document.querySelector('.history-list');
-    const li = document.createElement('li');
-    li.textContent = 'Berlin';
-    list.appendChild(li);
-
-    const input = document.querySelector('.search-box input');
-    const button = document.querySelector('.search-box button');
-    input.value = 'Berlin';
-
-    checkWeather.mockResolvedValueOnce({ name: 'Berlin', coord: {} });
-
-    drawWeather();
-    button.click();
-
-    await new Promise((r) => setTimeout(r));
-
-    const items = list.querySelectorAll('li');
-    expect(items.length).toBe(1);
-    expect(items[0].textContent).toBe('Berlin');
-  });
-
-  it('should delete the oldest history item when 10 cities are exceeded', async () => {
-    const input = document.querySelector('.search-box input');
-    const button = document.querySelector('.search-box button');
-    const list = document.querySelector('.history-list');
-
-    for (let i = 0; i < 10; i++) {
-      const li = document.createElement('li');
-      li.textContent = `City${i}`;
-      list.appendChild(li);
-    }
-
-    input.value = 'NewCity';
-
-    checkWeather.mockResolvedValueOnce({ name: 'NewCity', coord: {} });
-    fetch.mockResolvedValueOnce({
-      status: 200,
-      json: async () => ({}),
-    });
-
-    drawWeather();
-    button.click();
-
-    await new Promise((r) => setTimeout(r));
-
-    const items = list.querySelectorAll('li');
-    expect(items.length).toBe(10);
-    expect(Array.from(items).some((li) => li.textContent === 'NewCity')).toBe(
-      true,
+  it('saveHistory saves an array to localStorage', () => {
+    saveHistory(['London']);
+    expect(localStorage.getItem('cityHistory')).toBe(
+      JSON.stringify(['London']),
     );
   });
 
+  it('loadHistory returns an empty array if localStorage is empty', () => {
+    expect(loadHistory()).toEqual([]);
+  });
+});
+
+describe('drawWeather', () => {
+  beforeEach(() => {
+    jest.clearAllMocks();
+    localStorage.clear();
+  });
+
+  it('should render history and display weather for the last city', async () => {
+    localStorage.setItem('cityHistory', JSON.stringify(['Paris']));
+
+    document.body.innerHTML = `
+      <ul class="history-list"></ul>
+      <section class="weather-history">
+        <div class="city"></div>
+      </section>
+    `;
+
+    const mockData = {
+      coord: { lat: 48.85, lon: 2.35 },
+    };
+
+    checkWeather.mockResolvedValueOnce(mockData);
+
+    await drawWeather();
+
+    expect(checkWeather).toHaveBeenCalledWith('Paris');
+    expect(renderWeather).toHaveBeenCalledWith(
+      mockData,
+      expect.any(HTMLElement),
+    );
+    expect(renderMap).toHaveBeenCalledWith(
+      mockData.coord,
+      expect.any(HTMLElement),
+    );
+
+    const listItem = document.querySelector('.history-list li');
+    expect(listItem.textContent).toBe('Paris');
+  });
+  it('should handle click on history item and display its weather', async () => {
+    localStorage.setItem('cityHistory', JSON.stringify(['Rome', 'Madrid']));
+
+    document.body.innerHTML = `
+    <main>
+    <section class="weather-history">
+      <div class="city"></div>
+      <div class="temp"></div>
+      <div class="humidity"></div>
+      <div class="wind-speed"></div>
+      <div class="weather-img"><i></i></div>
+      <div class="map"></div>
+      <div class="error"></div>
+    </section>
+    </main>
+    <ul class="history-list"></ul>
+    `;
+
+    const mockCoord = { lat: 41.9, lon: 12.5 };
+    checkWeather.mockResolvedValue({
+      coord: mockCoord,
+      name: 'Rome',
+      main: { temp: 20, humidity: 50 },
+      wind: { speed: 5 },
+      weather: [{ main: 'Clear' }],
+    });
+
+    await drawWeather();
+
+    const romeItem = document.querySelector('.history-list li');
+    romeItem.click();
+
+    await new Promise((r) => setTimeout(r));
+
+    expect(checkWeather).toHaveBeenCalledWith('Rome');
+    expect(renderWeather).toHaveBeenCalled();
+    expect(renderMap).toHaveBeenCalled();
+  });
+});
+
+describe('geolocation', () => {
   it('should call renderWeather and renderMap on successful geolocation', async () => {
     const mockPosition = {
       coords: { latitude: 55.75, longitude: 37.61 },

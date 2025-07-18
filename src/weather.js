@@ -19,12 +19,11 @@ export async function checkWeather(city) {
   }
 }
 
-export function renderWeather(data) {
-  document.querySelector('.city').innerHTML = data.name;
-  document.querySelector('.temp').innerHTML =
-    Math.round(data.main.temp) + '&#8451';
-  document.querySelector('.humidity').innerHTML = data.main.humidity + '%';
-  document.querySelector('.wind-speed').innerHTML =
+export function renderWeather(data, root = document) {
+  root.querySelector('.city').innerHTML = data.name;
+  root.querySelector('.temp').innerHTML = Math.round(data.main.temp) + '&#8451';
+  root.querySelector('.humidity').innerHTML = data.main.humidity + '%';
+  root.querySelector('.wind-speed').innerHTML =
     Math.round(data.wind.speed) + ' km/h';
 
   const weatherIcon = document.querySelector('.weather-img i');
@@ -40,11 +39,7 @@ export function renderWeather(data) {
   }
 }
 
-export function renderMap({ lat, lon }) {
-  const map = document.querySelector('.map');
-  map.innerHTML = `<img src="${mapApiUrl}&ll=${lon},${lat}&size=500,450&z=10"></img>`;
-}
-
-export function saveToLocalStorage(city, data) {
-  localStorage.setItem(city, JSON.stringify(data));
+export function renderMap({ lat, lon }, root = document) {
+  const map = root.querySelector('.map');
+  map.innerHTML = `<img src="${mapApiUrl}&ll=${lon},${lat}&size=450,450&z=10"></img>`;
 }
