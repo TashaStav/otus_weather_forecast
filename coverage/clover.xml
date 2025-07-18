@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1752767492713" clover="3.2.0">
-  <project timestamp="1752767492714" name="All files">
-    <metrics statements="296" coveredstatements="255" conditionals="41" coveredconditionals="34" methods="17" coveredmethods="16" elements="354" coveredelements="305" complexity="0" loc="296" ncloc="296" packages="1" files="4" classes="4"/>
+<coverage generated="1752838906781" clover="3.2.0">
+  <project timestamp="1752838906781" name="All files">
+    <metrics statements="293" coveredstatements="252" conditionals="41" coveredconditionals="34" methods="17" coveredmethods="16" elements="351" coveredelements="302" complexity="0" loc="293" ncloc="293" packages="1" files="4" classes="4"/>
     <file name="events.js" path="C:\Users\1\OneDrive\Рабочий стол\Otus\КУРС JS BASIC\8_weather_forecast\src\events.js">
       <metrics statements="128" coveredstatements="103" conditionals="16" coveredconditionals="14" methods="9" coveredmethods="8"/>
       <line num="1" count="1" type="stmt"/>
@@ -260,7 +260,7 @@
       <line num="82" count="4" type="stmt"/>
     </file>
     <file name="weather.js" path="C:\Users\1\OneDrive\Рабочий стол\Otus\КУРС JS BASIC\8_weather_forecast\src\weather.js">
-      <metrics statements="48" coveredstatements="43" conditionals="7" coveredconditionals="5" methods="3" coveredmethods="3"/>
+      <metrics statements="45" coveredstatements="40" conditionals="7" coveredconditionals="5" methods="3" coveredmethods="3"/>
       <line num="1" count="1" type="stmt"/>
       <line num="2" count="1" type="stmt"/>
       <line num="3" count="1" type="stmt"/>
@@ -306,9 +306,6 @@
       <line num="43" count="1" type="stmt"/>
       <line num="44" count="1" type="stmt"/>
       <line num="45" count="1" type="stmt"/>
-      <line num="46" count="1" type="stmt"/>
-      <line num="47" count="1" type="stmt"/>
-      <line num="48" count="1" type="stmt"/>
     </file>
   </project>
 </coverage>
