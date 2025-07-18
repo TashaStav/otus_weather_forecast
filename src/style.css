@@ -52,9 +52,7 @@ color: darkred;
   width: 100%;
   padding: 0 1rem;
   margin: 0 auto; 
-  /* width: fit-content; */
-  /* grid-template-columns: 31.25rem auto; */
-    grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
   grid-template-rows: auto auto;
   gap: 1.875rem;
   grid-template-areas:
@@ -66,9 +64,7 @@ color: darkred;
   display: grid;
   place-items: center;
   margin: 0 auto; 
-  /* width: fit-content; */
-  /* grid-template-columns: 31.25rem auto; */
-      grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
   grid-template-rows: auto auto;
   gap: 1.875rem;
   grid-template-areas:
@@ -104,8 +100,8 @@ color: darkred;
   background-color: white
 }
 .map {
-  width: 470px;
-  height: 470px;
+  max-width: 470px;
+  max-height: 470px;
   grid-area: map;
 }
 .history-container{
@@ -151,7 +147,6 @@ color: darkred;
   display: flex;
   justify-content: flex-start;
   flex-direction: column;
-  min-width: 23.75rem;
   max-height: 28.125rem;
   margin-left: 3.125rem;
   border: 2px solid #4d220e;
@@ -188,6 +183,7 @@ color: darkred;
   font-style: normal;
   font-size: 1.625rem;
   margin: 0 auto;
+  padding: 30px;
 }
 
 .error {
@@ -214,9 +210,6 @@ color: darkred;
   margin-top: 3.75rem;
 }
 
-
-
-
 @media (max-width: 1100px) {
   .container {
     grid-template-columns: 1fr;
@@ -230,9 +223,11 @@ color: darkred;
   .link {
     margin-left: 3rem;
   }
+
   .link:last-child{
     margin-left: 0;
   }
+
   .weather {
     margin-left: 0;
     width: 100%;
@@ -242,6 +237,7 @@ color: darkred;
   .city-weather{
     margin-top: 6.5rem;
   }
+
   .map img {
   max-width: 100%;
   max-height: 100%;
@@ -254,59 +250,58 @@ color: darkred;
 
   .btn {
     width: 100%;
-    max-width: 200px;
     margin-top: 0.5rem;
   }
 
   .history {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  padding: 0;
-  text-align: center;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0;
+    text-align: center;
   }
 
   .history-title {
-  margin-top: 13px;
-  font-size: 1.5rem;
-  margin-bottom: 1rem;
+    margin-top: 13px;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
   }
 
   .burger {
-  display: inline-block;
-  cursor: pointer;
+    display: inline-block;
+    cursor: pointer;
   }
 
   .bar1, .bar2, .bar3 {
-  width: 35px;
-  height: 5px;
-  background-color: #4d220e;
-  margin: 6px 0;
-  transition: 0.4s;
+    width: 35px;
+    height: 5px;
+    background-color: #4d220e;
+    margin: 6px 0;
+    transition: 0.4s;
   }
 
   .change .bar1 {
-  -webkit-transform: rotate(-45deg) translate(-9px, 6px) ;
-  transform: rotate(-45deg) translate(-9px, 6px) ;
+    -webkit-transform: rotate(-45deg) translate(-9px, 6px) ;
+    transform: rotate(-45deg) translate(-9px, 6px) ;
   }
 
   .change .bar2 {
-  opacity: 0;
+    opacity: 0;
   }
 
   .change .bar3 {
-  -webkit-transform: rotate(45deg) translate(-8px, -8px) ;
-  transform: rotate(45deg) translate(-8px, -8px) ;
+    -webkit-transform: rotate(45deg) translate(-8px, -8px) ;
+    transform: rotate(45deg) translate(-8px, -8px) ;
   } 
 
   .history-list {
-  display: none;
+    display: none;
   }
 
   .history-list.open {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
   }
 
   .weather-history {
@@ -357,13 +352,13 @@ color: darkred;
     margin-top: 6.5rem;
 }
   .map {
-  max-width: 80%;
-  height: auto;
+    max-width: 80%;
+    height: auto;
   }
   .map img {
-  display: block;
-  margin: 0 auto;
-  max-width: 100%;
+    display: block;
+    margin: 0 auto;
+    max-width: 100%;
   }
   .weather-history .weather {
     width: 100%;
@@ -391,26 +386,26 @@ color: darkred;
   }
 
   .header {
-  font-size: 1rem;
-  text-align: center;
-  padding: 1rem 0;
-  margin-bottom: 10px;
-  width: 100%;
+    font-size: 1rem;
+    text-align: center;
+    padding: 1rem 0;
+    margin-bottom: 10px;
+    width: 100%;
 }
 
   .main-nav {
-  display: flex;
-  justify-content: center;
-  gap: 1rem; 
-  flex-wrap: wrap;
+    display: flex;
+    justify-content: center;
+    gap: 1rem; 
+    flex-wrap: wrap;
 }
 
   .main-nav .link {
-  font-size: 1rem;
+    font-size: 1rem;
 }
 
   .form {
-      text-align: center;
+    text-align: center;
   }
 
   .form input {
@@ -437,13 +432,13 @@ color: darkred;
     margin-top: 6.5rem;
 }
   .map {
-  max-width: 80%;
-  height: auto;
+    max-width: 80%;
+    height: auto;
   }
   .map img {
-  display: block;
-  margin: 0 auto;
-  max-width: 100%;
+    display: block;
+    margin: 0 auto;
+    max-width: 100%;
   }
 
   .weather-history .weather {
